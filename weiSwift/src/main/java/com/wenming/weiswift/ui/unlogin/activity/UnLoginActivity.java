@@ -2,10 +2,8 @@ package com.wenming.weiswift.ui.unlogin.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -16,12 +14,12 @@ import android.widget.RelativeLayout;
 
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.wenming.weiswift.R;
-import com.wenming.weiswift.ui.common.StatusBarUtils;
 import com.wenming.weiswift.ui.common.login.Constants;
 import com.wenming.weiswift.ui.unlogin.fragment.DiscoverFragment;
 import com.wenming.weiswift.ui.unlogin.fragment.HomeFragment;
 import com.wenming.weiswift.ui.unlogin.fragment.MessageFragment;
 import com.wenming.weiswift.ui.unlogin.fragment.ProfileFragment;
+import com.wenming.weiswift.utils.LogUtil;
 import com.wenming.weiswift.utils.ToastUtil;
 
 
@@ -185,6 +183,7 @@ public class UnLoginActivity extends AppCompatActivity {
                 + "&display=mobile" + "&scope=" + Constants.SCOPE;
 
         Intent intent = new Intent(mContext, WebViewActivity.class);
+        LogUtil.d("APP",authurl);
         intent.putExtra("url", authurl);
         startActivity(intent);
         finish();
