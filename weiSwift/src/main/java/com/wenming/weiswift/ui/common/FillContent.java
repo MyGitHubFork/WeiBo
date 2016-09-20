@@ -85,13 +85,15 @@ public class FillContent {
      * @param profile_img
      * @param profile_verified
      */
-    public static void fillProfileImg(final Context context, final User user, final ImageView profile_img, final ImageView profile_verified) {
+    public static void fillProfileImg(final Context context, final User user, final ImageView profile_img, final
+    ImageView profile_verified) {
         profile_verified.setVisibility(View.GONE);
         profile_verified.setVisibility(View.VISIBLE);
 
         if (user.verified == true && user.verified_type == 0) {
             profile_verified.setImageResource(R.drawable.avatar_vip);
-        } else if (user.verified == true && (user.verified_type == 1 || user.verified_type == 2 || user.verified_type == 3)) {
+        } else if (user.verified == true && (user.verified_type == 1 || user.verified_type == 2 || user.verified_type
+                == 3)) {
             profile_verified.setImageResource(R.drawable.avatar_enterprise_vip);
         } else if (user.verified == false && user.verified_type == 220) {
             profile_verified.setImageResource(R.drawable.avatar_grassroot);
@@ -121,14 +123,16 @@ public class FillContent {
      * @param profile_time
      * @param weibo_comefrom
      */
-    public static void fillTitleBar(Context context, Comment comment, ImageView profile_img, ImageView profile_verified, TextView profile_name, TextView profile_time, TextView weibo_comefrom) {
+    public static void fillTitleBar(Context context, Comment comment, ImageView profile_img, ImageView
+            profile_verified, TextView profile_name, TextView profile_time, TextView weibo_comefrom) {
         fillProfileImg(context, comment.user, profile_img, profile_verified);
         setWeiBoName(profile_name, comment.user);
         setWeiBoTime(context, profile_time, comment);
         setWeiBoComeFrom(weibo_comefrom, comment);
     }
 
-    public static void fillTitleBar(Context context, Status status, ImageView profile_img, ImageView profile_verified, TextView profile_name, TextView profile_time, TextView weibo_comefrom) {
+    public static void fillTitleBar(Context context, Status status, ImageView profile_img, ImageView
+            profile_verified, TextView profile_name, TextView profile_time, TextView weibo_comefrom) {
         fillProfileImg(context, status.user, profile_img, profile_verified);
         setWeiBoName(profile_name, status.user);
         setWeiBoTime(context, profile_time, status);
@@ -240,7 +244,9 @@ public class FillContent {
      * @param redirect
      * @param feedlike
      */
-    public static void fillButtonBar(final Context context, final Status status, LinearLayout bottombar_retweet, LinearLayout bottombar_comment, LinearLayout bottombar_attitude, TextView comment, TextView redirect, TextView feedlike) {
+    public static void fillButtonBar(final Context context, final Status status, LinearLayout bottombar_retweet,
+                                     LinearLayout bottombar_comment, LinearLayout bottombar_attitude, TextView
+                                             comment, TextView redirect, TextView feedlike) {
         if (status.comments_count != 0) {
             comment.setText(status.comments_count + "");
         } else {
@@ -262,7 +268,8 @@ public class FillContent {
         fillButtonBar(context, status, bottombar_retweet, bottombar_comment, bottombar_attitude);
     }
 
-    public static void fillButtonBar(final Context context, final Status status, LinearLayout bottombar_retweet, LinearLayout bottombar_comment, LinearLayout bottombar_attitude) {
+    public static void fillButtonBar(final Context context, final Status status, LinearLayout bottombar_retweet,
+                                     LinearLayout bottombar_comment, LinearLayout bottombar_attitude) {
         //如果转发的内容已经被删除,则不允许转发
         if (status.retweeted_status != null && status.retweeted_status.user == null) {
             bottombar_retweet.setEnabled(false);
@@ -296,7 +303,8 @@ public class FillContent {
         });
     }
 
-    public static void fillDetailButtonBar(final Context context, final Status status, LinearLayout bottombar_retweet, LinearLayout bottombar_comment, LinearLayout bottombar_attitude) {
+    public static void fillDetailButtonBar(final Context context, final Status status, LinearLayout
+            bottombar_retweet, LinearLayout bottombar_comment, LinearLayout bottombar_attitude) {
         //如果转发的内容已经被删除,则不允许转发
         if (status.retweeted_status != null && status.retweeted_status.user == null) {
             bottombar_retweet.setEnabled(false);
@@ -368,11 +376,13 @@ public class FillContent {
             retweetcontent_buffer.append("@");
             retweetcontent_buffer.append(status.retweeted_status.user.name + " :  ");
             retweetcontent_buffer.append(status.retweeted_status.text);
-            origin_nameAndcontent.setText(WeiBoContentTextUtil.getWeiBoContent(retweetcontent_buffer.toString(), context, origin_nameAndcontent));
+            origin_nameAndcontent.setText(WeiBoContentTextUtil.getWeiBoContent(retweetcontent_buffer.toString(),
+                    context, origin_nameAndcontent));
             //origin_nameAndcontent.setText(retweetcontent_buffer.toString());
 
         } else {
-            origin_nameAndcontent.setText(WeiBoContentTextUtil.getWeiBoContent("抱歉，此微博已被作者删除。查看帮助：#网页链接#", context, origin_nameAndcontent));
+            origin_nameAndcontent.setText(WeiBoContentTextUtil.getWeiBoContent("抱歉，此微博已被作者删除。查看帮助：#网页链接#", context,
+                    origin_nameAndcontent));
             //origin_nameAndcontent.setText("抱歉，此微博已被作者删除。查看帮助：#网页链接#");
         }
     }
@@ -433,7 +443,8 @@ public class FillContent {
     }
 
 
-    private static void displayLongPic(File file, Bitmap bitmap, SubsamplingScaleImageView longImg, ImageView imageLable) {
+    private static void displayLongPic(File file, Bitmap bitmap, SubsamplingScaleImageView longImg, ImageView
+            imageLable) {
         imageLable.setVisibility(View.VISIBLE);
         imageLable.setImageResource(R.drawable.timeline_image_longimage);
         longImg.setZoomEnabled(false);
@@ -487,93 +498,102 @@ public class FillContent {
      * @param mDoubleImgSize
      * @param mThreeImgSize
      */
-    public static void fillImageList(final Context context, final Status status, DisplayImageOptions options, final int position, final SubsamplingScaleImageView longImg, final ImageView norImg, final GifImageView gifImg, final ImageView imageLabel, ImageSize mSingleImageSize, ImageSize mDoubleImgSize, ImageSize mThreeImgSize) {
+    public static void fillImageList(final Context context, final Status status, DisplayImageOptions options, final
+    int position, final SubsamplingScaleImageView longImg, final ImageView norImg, final GifImageView gifImg, final
+                                     ImageView imageLabel, ImageSize mSingleImageSize, ImageSize mDoubleImgSize,
+                                     ImageSize mThreeImgSize) {
         final ArrayList<String> urllist = status.bmiddle_pic_urls;
         if (urllist.size() == 1) {
-            ImageLoader.getInstance().loadImage(urllist.get(position), mSingleImageSize, options, new SimpleImageLoadingListener() {
-                @Override
-                public void onLoadingStarted(String s, View view) {
-                    setLabelForGif(urllist.get(position), imageLabel);
-                }
+            ImageLoader.getInstance().loadImage(urllist.get(position), mSingleImageSize, options, new
+                    SimpleImageLoadingListener() {
+                        @Override
+                        public void onLoadingStarted(String s, View view) {
+                            setLabelForGif(urllist.get(position), imageLabel);
+                        }
 
-                @Override
-                public void onLoadingComplete(String imageUri, View view, Bitmap bitmap) {
-                    File file = DiskCacheUtils.findInCache(urllist.get(position), ImageLoader.getInstance().getDiskCache());
-                    if (imageUri.endsWith(".gif")) {
-                        gifImg.setVisibility(View.VISIBLE);
-                        longImg.setVisibility(View.INVISIBLE);
-                        norImg.setVisibility(View.INVISIBLE);
-                        displayGif(file, gifImg, imageLabel);
-                    } else if (isLongImg(file, bitmap)) {
-                        longImg.setVisibility(View.VISIBLE);
-                        gifImg.setVisibility(View.INVISIBLE);
-                        norImg.setVisibility(View.INVISIBLE);
-                        displayLongPic(file, bitmap, longImg, imageLabel);
-                    } else {
-                        norImg.setVisibility(View.VISIBLE);
-                        longImg.setVisibility(View.INVISIBLE);
-                        gifImg.setVisibility(View.INVISIBLE);
-                        displayNorImg(file, bitmap, norImg, imageLabel);
-                    }
-                }
-            });
-        }else if (urllist.size() == 2 || urllist.size() == 4){
-            ImageLoader.getInstance().loadImage(urllist.get(position), mDoubleImgSize, options, new SimpleImageLoadingListener() {
-                @Override
-                public void onLoadingStarted(String s, View view) {
-                    setLabelForGif(urllist.get(position), imageLabel);
-                }
+                        @Override
+                        public void onLoadingComplete(String imageUri, View view, Bitmap bitmap) {
+                            File file = DiskCacheUtils.findInCache(urllist.get(position), ImageLoader.getInstance()
+                                    .getDiskCache());
+                            if (imageUri.endsWith(".gif")) {
+                                gifImg.setVisibility(View.VISIBLE);
+                                longImg.setVisibility(View.INVISIBLE);
+                                norImg.setVisibility(View.INVISIBLE);
+                                displayGif(file, gifImg, imageLabel);
+                            } else if (isLongImg(file, bitmap)) {
+                                longImg.setVisibility(View.VISIBLE);
+                                gifImg.setVisibility(View.INVISIBLE);
+                                norImg.setVisibility(View.INVISIBLE);
+                                displayLongPic(file, bitmap, longImg, imageLabel);
+                            } else {
+                                norImg.setVisibility(View.VISIBLE);
+                                longImg.setVisibility(View.INVISIBLE);
+                                gifImg.setVisibility(View.INVISIBLE);
+                                displayNorImg(file, bitmap, norImg, imageLabel);
+                            }
+                        }
+                    });
+        } else if (urllist.size() == 2 || urllist.size() == 4) {
+            ImageLoader.getInstance().loadImage(urllist.get(position), mDoubleImgSize, options, new
+                    SimpleImageLoadingListener() {
+                        @Override
+                        public void onLoadingStarted(String s, View view) {
+                            setLabelForGif(urllist.get(position), imageLabel);
+                        }
 
-                @Override
-                public void onLoadingComplete(String imageUri, View view, Bitmap bitmap) {
-                    File file = DiskCacheUtils.findInCache(urllist.get(position), ImageLoader.getInstance().getDiskCache());
-                    if (imageUri.endsWith(".gif")) {
-                        gifImg.setVisibility(View.VISIBLE);
-                        longImg.setVisibility(View.INVISIBLE);
-                        norImg.setVisibility(View.INVISIBLE);
-                        displayGif(file, gifImg, imageLabel);
-                    } else if (isLongImg(file, bitmap)) {
-                        longImg.setVisibility(View.VISIBLE);
-                        gifImg.setVisibility(View.INVISIBLE);
-                        norImg.setVisibility(View.INVISIBLE);
-                        displayLongPic(file, bitmap, longImg, imageLabel);
-                    } else {
-                        norImg.setVisibility(View.VISIBLE);
-                        longImg.setVisibility(View.INVISIBLE);
-                        gifImg.setVisibility(View.INVISIBLE);
-                        displayNorImg(file, bitmap, norImg, imageLabel);
-                    }
-                }
-            });
-        }else if (urllist.size()== 3 || urllist.size() >= 5){
-            ImageLoader.getInstance().loadImage(urllist.get(position), mThreeImgSize, options, new SimpleImageLoadingListener() {
-                @Override
-                public void onLoadingStarted(String s, View view) {
-                    setLabelForGif(urllist.get(position), imageLabel);
-                }
+                        @Override
+                        public void onLoadingComplete(String imageUri, View view, Bitmap bitmap) {
+                            File file = DiskCacheUtils.findInCache(urllist.get(position), ImageLoader.getInstance()
+                                    .getDiskCache());
+                            if (imageUri.endsWith(".gif")) {
+                                gifImg.setVisibility(View.VISIBLE);
+                                longImg.setVisibility(View.INVISIBLE);
+                                norImg.setVisibility(View.INVISIBLE);
+                                displayGif(file, gifImg, imageLabel);
+                            } else if (isLongImg(file, bitmap)) {
+                                longImg.setVisibility(View.VISIBLE);
+                                gifImg.setVisibility(View.INVISIBLE);
+                                norImg.setVisibility(View.INVISIBLE);
+                                displayLongPic(file, bitmap, longImg, imageLabel);
+                            } else {
+                                norImg.setVisibility(View.VISIBLE);
+                                longImg.setVisibility(View.INVISIBLE);
+                                gifImg.setVisibility(View.INVISIBLE);
+                                displayNorImg(file, bitmap, norImg, imageLabel);
+                            }
+                        }
+                    });
+        } else if (urllist.size() == 3 || urllist.size() >= 5) {
+            ImageLoader.getInstance().loadImage(urllist.get(position), mThreeImgSize, options, new
+                    SimpleImageLoadingListener() {
+                        @Override
+                        public void onLoadingStarted(String s, View view) {
+                            setLabelForGif(urllist.get(position), imageLabel);
+                        }
 
-                @Override
-                public void onLoadingComplete(String imageUri, View view, Bitmap bitmap) {
-                    File file = DiskCacheUtils.findInCache(urllist.get(position), ImageLoader.getInstance().getDiskCache());
-                    if (imageUri.endsWith(".gif")) {
-                        gifImg.setVisibility(View.VISIBLE);
-                        longImg.setVisibility(View.INVISIBLE);
-                        norImg.setVisibility(View.INVISIBLE);
-                        displayGif(file, gifImg, imageLabel);
-                    } else if (isLongImg(file, bitmap)) {
-                        longImg.setVisibility(View.VISIBLE);
-                        gifImg.setVisibility(View.INVISIBLE);
-                        norImg.setVisibility(View.INVISIBLE);
-                        displayLongPic(file, bitmap, longImg, imageLabel);
-                    } else {
-                        norImg.setVisibility(View.VISIBLE);
-                        longImg.setVisibility(View.INVISIBLE);
-                        gifImg.setVisibility(View.INVISIBLE);
-                        displayNorImg(file, bitmap, norImg, imageLabel);
-                    }
-                }
-            });
-        }else {
+                        @Override
+                        public void onLoadingComplete(String imageUri, View view, Bitmap bitmap) {
+                            File file = DiskCacheUtils.findInCache(urllist.get(position), ImageLoader.getInstance()
+                                    .getDiskCache());
+                            if (imageUri.endsWith(".gif")) {
+                                gifImg.setVisibility(View.VISIBLE);
+                                longImg.setVisibility(View.INVISIBLE);
+                                norImg.setVisibility(View.INVISIBLE);
+                                displayGif(file, gifImg, imageLabel);
+                            } else if (isLongImg(file, bitmap)) {
+                                longImg.setVisibility(View.VISIBLE);
+                                gifImg.setVisibility(View.INVISIBLE);
+                                norImg.setVisibility(View.INVISIBLE);
+                                displayLongPic(file, bitmap, longImg, imageLabel);
+                            } else {
+                                norImg.setVisibility(View.VISIBLE);
+                                longImg.setVisibility(View.INVISIBLE);
+                                gifImg.setVisibility(View.INVISIBLE);
+                                displayNorImg(file, bitmap, norImg, imageLabel);
+                            }
+                        }
+                    });
+        } else {
             ImageLoader.getInstance().loadImage(urllist.get(position), options, new SimpleImageLoadingListener() {
                 @Override
                 public void onLoadingStarted(String s, View view) {
@@ -582,7 +602,8 @@ public class FillContent {
 
                 @Override
                 public void onLoadingComplete(String imageUri, View view, Bitmap bitmap) {
-                    File file = DiskCacheUtils.findInCache(urllist.get(position), ImageLoader.getInstance().getDiskCache());
+                    File file = DiskCacheUtils.findInCache(urllist.get(position), ImageLoader.getInstance()
+                            .getDiskCache());
                     if (imageUri.endsWith(".gif")) {
                         gifImg.setVisibility(View.VISIBLE);
                         longImg.setVisibility(View.INVISIBLE);
@@ -685,14 +706,16 @@ public class FillContent {
     }
 
 
-    public static void fillDetailBar(int comments_count, int reposts_count, int attitudes_count, TextView comment, TextView redirect, TextView feedlike) {
+    public static void fillDetailBar(int comments_count, int reposts_count, int attitudes_count, TextView comment,
+                                     TextView redirect, TextView feedlike) {
         comment.setText("评论 " + comments_count);
         redirect.setText("转发 " + reposts_count);
         feedlike.setText("赞 " + attitudes_count);
 
     }
 
-    public static void refreshNoneView(Context context, int type, int repostss_count, int comments_count, View noneView) {
+    public static void refreshNoneView(Context context, int type, int repostss_count, int comments_count, View
+            noneView) {
         TextView textView = (TextView) noneView.findViewById(R.id.tv_normal_refresh_footer_status);
         if (NetUtil.isConnected(context)) {
             switch (type) {
@@ -733,7 +756,8 @@ public class FillContent {
      * @param commentView
      */
 
-    public static void fillCommentList(Context context, int commentCount, ArrayList<Comment> commentArrayList, final RecyclerView recyclerView, TextView commentView) {
+    public static void fillCommentList(Context context, int commentCount, ArrayList<Comment> commentArrayList, final
+    RecyclerView recyclerView, TextView commentView) {
         CommentDetailAdapter commentAdapter = new CommentDetailAdapter(context, commentArrayList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -748,7 +772,8 @@ public class FillContent {
      * @param profile_name
      * @param content
      */
-    public static void fillMentionCenterContent(Status retweetstatus, ImageView profile_img, TextView profile_name, TextView content) {
+    public static void fillMentionCenterContent(Status retweetstatus, ImageView profile_img, TextView profile_name,
+                                                TextView content) {
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.message_image_default)
@@ -808,7 +833,10 @@ public class FillContent {
 
     }
 
-    public static void fillCommentCenterContent(final Context context, Comment comment, LinearLayout bg_layout, LinearLayout comment_weibolayout, EmojiTextView mycomment, final CropImageView mentionitem_img, TextView profile_name, TextView content) {
+    public static void fillCommentCenterContent(final Context context, Comment comment, LinearLayout bg_layout,
+                                                LinearLayout comment_weibolayout, EmojiTextView mycomment, final
+                                                CropImageView mentionitem_img, TextView profile_name, TextView
+                                                        content) {
         //如果存在回复，则需要填充我回复的评论
         if (comment.reply_comment != null) {
             mycomment.setVisibility(View.VISIBLE);
@@ -839,15 +867,17 @@ public class FillContent {
         //评论的微博存在且没有被删除
         if (comment.status != null && comment.status.user != null) {
             //评论的微博是转发微博且包含图片
-            if (comment.status.retweeted_status != null && !TextUtils.isEmpty(comment.status.retweeted_status.bmiddle_pic)) {
-                ImageLoader.getInstance().displayImage(comment.status.retweeted_status.bmiddle_pic, mentionitem_img, options, new SimpleImageLoadingListener() {
-                    @Override
-                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                        if (returnImageType(context, loadedImage) == IMAGE_TYPE_LONG_TEXT) {
-                            mentionitem_img.setCropType(CropImageView.CropType.CENTER_TOP);
-                        }
-                    }
-                });
+            if (comment.status.retweeted_status != null && !TextUtils.isEmpty(comment.status.retweeted_status
+                    .bmiddle_pic)) {
+                ImageLoader.getInstance().displayImage(comment.status.retweeted_status.bmiddle_pic, mentionitem_img,
+                        options, new SimpleImageLoadingListener() {
+                            @Override
+                            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                                if (returnImageType(context, loadedImage) == IMAGE_TYPE_LONG_TEXT) {
+                                    mentionitem_img.setCropType(CropImageView.CropType.CENTER_TOP);
+                                }
+                            }
+                        });
             }
             //评论的微博是转发微博，但是没有图片
             else if (comment.status.retweeted_status != null && comment.status.retweeted_status.bmiddle_pic == null) {
@@ -855,14 +885,15 @@ public class FillContent {
             }
             //评论的微博是原创微博，且存在图片
             else if (comment.status.bmiddle_pic != null && !TextUtils.isEmpty(comment.status.bmiddle_pic)) {
-                ImageLoader.getInstance().displayImage(comment.status.bmiddle_pic, mentionitem_img, options, new SimpleImageLoadingListener() {
-                    @Override
-                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                        if (returnImageType(context, loadedImage) == IMAGE_TYPE_LONG_TEXT) {
-                            mentionitem_img.setCropType(CropImageView.CropType.CENTER_TOP);
-                        }
-                    }
-                });
+                ImageLoader.getInstance().displayImage(comment.status.bmiddle_pic, mentionitem_img, options, new
+                        SimpleImageLoadingListener() {
+                            @Override
+                            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                                if (returnImageType(context, loadedImage) == IMAGE_TYPE_LONG_TEXT) {
+                                    mentionitem_img.setCropType(CropImageView.CropType.CENTER_TOP);
+                                }
+                            }
+                        });
             }
             //评论的微博是原创微博，但是没有图片
             else {
@@ -898,7 +929,8 @@ public class FillContent {
      * @param user
      * @param follwerRelation
      */
-    public static void fillFollowerRealtionShip(Context context, User user, ImageView follwerRelation, TextView textView) {
+    public static void fillFollowerRealtionShip(Context context, User user, ImageView follwerRelation, TextView
+            textView) {
         //设置是否关注了此人
         if (user.following == true) {
             follwerRelation.setImageResource(R.drawable.card_icon_arrow);
@@ -908,7 +940,8 @@ public class FillContent {
         }
     }
 
-    public static void fillFriendContent(Context context, User user, ImageView friendImg, ImageView friendVerified, ImageView followme, TextView friendName, TextView friendContent) {
+    public static void fillFriendContent(Context context, User user, ImageView friendImg, ImageView friendVerified,
+                                         ImageView followme, TextView friendName, TextView friendContent) {
         FillContent.fillProfileImg(context, user, friendImg, friendVerified);
         setWeiBoName(friendName, user);
 
@@ -923,7 +956,8 @@ public class FillContent {
     }
 
 
-    public static void fillUserHeadView(final Context context, final User user, final ImageView userCoverimg, ImageView userImg, ImageView userVerified, TextView userName,
+    public static void fillUserHeadView(final Context context, final User user, final ImageView userCoverimg,
+                                        ImageView userImg, ImageView userVerified, TextView userName,
                                         ImageView userSex, TextView userFriends,
                                         TextView userFollows, TextView userVerifiedreason) {
         if (!TextUtils.isEmpty(user.cover_image_phone)) {
